@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Del seny a la Rauxa - Un film de Gael Amat">
+    <meta name="author" content="Gael Amat">
+    <meta property="og:title" content="Del seny a la Rauxa">
+    <meta property="og:description" content="Un film de Gael Amat">
+    <meta property="og:type" content="website">
+    <title>Del seny a la Rauxa | Un film de Gael Amat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">DSALR</div>
+        <a href="#contacto" class="nav-link">Contacte</a>
+    </nav>
+
+    <!-- Hero Section with YouTube Video -->
+    <section class="hero" id="inicio">
+        <div class="video-container">
+            <iframe 
+                id="youtube-video"
+                src="https://www.youtube.com/embed/E48S7NQUQvE?autoplay=1&mute=1&loop=1&playlist=E48S7NQUQvE&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=https://yourdomain.com"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="video-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="title">Del seny a la Rauxa</h1>
+            <p class="subtitle">un film de Gael Amat</p>
+        </div>
+
+        <a href="#contacto" class="scroll-indicator" aria-label="Scroll to contact">
+            <span></span>
+        </a>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="contact-container">
+            <h2 class="contact-title">Contacte</h2>
+            
+            <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <input type="text" name="nombre" placeholder="Nom" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="asunto" placeholder="Assumpte">
+                </div>
+                <div class="form-group">
+                    <textarea name="mensaje" placeholder="Missatge" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar</button>
+            </form>
+
+            <div class="contact-info">
+                <p><a href="mailto:contacto@gaelamat.com">contacto@gaelamat.com</a></p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://vimeo.com/" target="_blank" rel="noopener noreferrer">Vimeo</a>
+                    <a href="https://www.imdb.com/" target="_blank" rel="noopener noreferrer">IMDB</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Gael Amat. Tots els drets reservats.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+``_
