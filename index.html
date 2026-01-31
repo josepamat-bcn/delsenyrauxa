@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Del seny a la Rauxa - Un film de Gael Amat</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .cta-button {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: white;
+            color: black;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        /* Estilos para el modal de contacto */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .modal-content p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .email-link {
+            display: inline-block;
+            background-color: #222;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .email-link:hover {
+            background-color: #444;
+            transform: translateY(-2px);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: 300;
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .title {
+                font-size: 4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .cta-button {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                letter-spacing: 1px;
+            }
+            
+            .cta-button {
+                padding: 8px 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <div class="overlay"></div>
+        <iframe 
+            class="video-background" 
+            src="https://www.youtube.com/embed/E48S7NQUQvE?autoplay=1&mute=1&loop=1&playlist=E48S7NQUQvE&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen
+            id="background-video">
+        </iframe>
+    </div>
+
+    <div class="content">
+        <h1 class="title">Del seny a la Rauxa</h1>
+        <p class="subtitle">Un film de Gael Amat</p>
+        <button class="cta-button" id="contact-btn">Descobreix més</button>
+    </div>
+
+    <div class="video-info">
+        Vídeo: Gael Amat
+    </div>
+
+    <!-- Modal de contacto -->
+    <div class="contact-modal" id="contact-modal">
+        <button class="close-modal" id="close-modal">&times;</button>
+        <div class="modal-content">
+            <h2>Contacta amb Gael Amat</h2>
+            <p>Per a més informació sobre el film "Del seny a la Rauxa", pots posar-te en contacte directament amb el director:</p>
+            <p><strong>Correu electrònic:</strong></p>
+            <a href="mailto:gaelamatfer@gmail.com?subject=Consulta sobre 'Del seny a la Rauxa'&body=Estimat Gael,%0D%0A%0D%0AM'interessa saber més sobre el teu film 'Del seny a la Rauxa'.%0D%0A%0D%0ASalutacions," class="email-link">
+                Envia correu a gaelamatfer@gmail.com
+            </a>
+            <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+                Fes clic al botó superior per obrir el teu client de correu electrònic amb el missatge preparat.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const contactBtn = document.getElementById('contact-btn');
+            const contactModal = document.getElementById('contact-modal');
+            const closeModal = document.getElementById('close-modal');
+            const backgroundVideo = document.getElementById('background-video');
+            
+            // Abrir modal al hacer clic en "Descobreix més"
+            contactBtn.addEventListener('click', function() {
+                contactModal.style.display = 'flex';
+                // Pausar el video de fondo cuando se abre el modal
+                if (backgroundVideo && backgroundVideo.contentWindow) {
+                    backgroundVideo.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                }
+            });
+            
+            // Cerrar modal
+            closeModal.addEventListener('click', function() {
+                contactModal.style.display = 'none';
+                // Reanudar el video de fondo cuando se cierra el modal
+                if (backgroundVideo && backgroundVideo.contentWindow) {
+                    backgroundVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+            });
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            contactModal.addEventListener('click', function(e) {
+                if (e.target === contactModal) {
+                    contactModal.style.display = 'none';
+                    // Reanudar el video de fondo cuando se cierra el modal
+                    if (backgroundVideo && backgroundVideo.contentWindow) {
+                        backgroundVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    }
+                }
+            });
+            
+            // Control de reproducción del video en dispositivos móviles
+            function playVideo() {
+                if (backgroundVideo && backgroundVideo.contentWindow) {
+                    backgroundVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+            }
+            
+            // Reproducir el video después de la carga
+            setTimeout(playVideo, 1000);
+            
+            // Manejar la tecla Escape para cerrar el modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && contactModal.style.display === 'flex') {
+                    contactModal.style.display = 'none';
+                    // Reanudar el video de fondo cuando se cierra el modal
+                    if (backgroundVideo && backgroundVideo.contentWindow) {
+                        backgroundVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
